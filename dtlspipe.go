@@ -432,9 +432,8 @@ func runDtlspipe(argsStr string) int {
 	appCtx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	go run(argsStr, appCtx, cancel)
 
-	id := generateUniqueID()
-
 	threadMutex.Lock()
+	id := generateUniqueID()
 	cancellations[id] = &cancel
 	threadMutex.Unlock()
 
